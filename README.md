@@ -1,4 +1,4 @@
-# caesar
+# Caesar cypher
 Decrypted / Encrypter caesar cipher
 
 **Warning:**
