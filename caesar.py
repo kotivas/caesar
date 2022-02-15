@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 #by kotivas
 
+# добавления языка для шифрования:
+# добавьте алфавит желаемого языка в массив lang[8]
+# и запишите язык в строку выбора языка[36]
+
 lang = [['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 
         'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 
         's', 't', 'u', 'v', 'w', 'x', 'y', 'z' ],
@@ -9,29 +13,34 @@ lang = [['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
         'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 
         'ы', 'ь', 'э', 'ю', 'я']]
 
-in_lang = int(input("Choose an alphabet \n[0] English \n[1] Russian \n:"))
-ind = input("\nSpecify an indent\nUse opposite numbers to decrypt\nUse [?] if indent is unknown\n:")
-txt = input("\nText to encrypt\n:").lower()
 
-def encrypt(lang, ind, txt):
-    result = ''
+def encrypt(lang, ind, txt): # главная (и единственная) функция шифрования/дешифрования
+    result = '' # создание пременной для итогового результата
     for i in range(0, len(txt)):
-        if txt[i] not in lang:
+        if txt[i] not in lang: # если символа нету в алфавите, то символ записывается в резльтат и пропускается 1 проход цикла
                 result += txt[i]
                 continue
+        sym = lang.index(txt[i]) + ind # вычисляется положение шифрованого символа относительно алфавита
+        if sym >= len(lang): # если положение шифрованого символа вышло за пределы алфавита
+            sym = sym - len(lang) # отнимается длина алфавита от положения символа
+        result += lang[sym] # в итоговую переменную записывается символ
+    return result # возвращение зашифрованого/дешифрованого текста
 
-        sym = lang.index(txt[i]) + ind
 
-        if sym >= len(lang):
-            sym = sym - len(lang)
-        result += lang[sym]
-    return result
+if __name__ == "__main__":
 
-if ind=='?':
-    print("\nOutput text:")
-    for i in range(0, len(lang[in_lang])):
-        print("Indent -{0}: {1}".format(i, encrypt(lang[in_lang], i * -1, txt)))
+    # получение от пользователя параметров (язык, отступ, текст)
+    # если отступ неизвестен '?', цикл выполняется *длина алфавита* раз, и выводит все проходы
+    # если отступ известен, функция вызывается 1 раз
 
-else:
-    print("\nOutput text: {}".format(encrypt(lang[in_lang], int(ind), txt)))
+    in_lang = int(input("Choose an alphabet \n[0] English \n[1] Russian \n:")) # получение языка
+    ind = input("\nSpecify an indent\nUse opposite numbers to decrypt\nUse [?] if indent is unknown\n:") # получение отступа
+    txt = input("\nText to encrypt\n:").lower() #получения теста для шифрования/дешифрования
 
+    if ind=='?': # цикл если отступ неизвестен
+        print("\nOutput text:")
+        for i in range(0, len(lang[in_lang])):
+            print("Indent -{0}: {1}".format(i, encrypt(lang[in_lang], i * -1, txt))) #вывод дешифрованого текста с каждым отступом
+
+    else: # если отступ известен
+        print("\nOutput text: {}".format(encrypt(lang[in_lang], int(ind), txt))) # вывод шифрованного/дешифрованого текста
