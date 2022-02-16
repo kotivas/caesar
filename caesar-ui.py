@@ -1,7 +1,12 @@
 #by kotivas
 #PyQt5
 
-from PyQt5 import QtWidgets, uic
+try: # проверка на наличие PyQt5
+    from PyQt5 import QtWidgets, uic
+except ImportError: 
+    print("Requires PyQt5 to run \npip install PyQt5")
+    exit()
+
 from sys import argv
 import caesar
 
@@ -28,7 +33,7 @@ class Ui(QtWidgets.QMainWindow):
 
         self.show()
 
-    def indent_butt(self): # если цикл неизвестен, то переменная indent переходит в позицию False, иначе True
+    def indent_butt(self): # если отступ неизвестен, то переменная indent переходит в позицию False, иначе True
         global indent
 
         if indent==True:
