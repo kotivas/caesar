@@ -29,52 +29,52 @@ class Ui(QtWidgets.QMainWindow):
         self.textout = self.findChild(QtWidgets.QTextEdit, 'textEdit') # инициилизация поля вывода
 
         self.combobox = self.findChild(QtWidgets.QComboBox, 'comboBox') # Инициализация поле для выбора языка, если язык изменён, то выполняется функция exec
+        self.combobox.addItems(languages) # добавления языков
         self.combobox.currentIndexChanged.connect(self.exec)
 
         self.show()
 
     def indent_butt(self): # если отступ неизвестен, то переменная indent переходит в позицию False, иначе True
-        global indent
+        global indent_is_known
 
-        if indent==True:
-            indent = False
+        if indent_is_known==True:
+            indent_is_known = False
 
         else:
-            indent = True
+            indent_is_known = True
 
         self.exec() # вызов функции exec
 
     def exec(self):
-        ind = self.spin.value() # получение отступа
-        txt = self.textin.toPlainText().lower() # получения текста для шифрования/дешифрования
-        lang = self.combobox.currentText() # получения языка
-        self.spin.setReadOnly(not indent) # если отступ неизвестен, блокируется спинбокс для выбора отступа
+        indent = self.spin.value() # получение отступа
+        text = self.textin.toPlainText().lower() # получения текста для шифрования/дешифрования
+        language = self.combobox.currentText() # получения языка
+        self.spin.setReadOnly(not indent_is_known) # если отступ неизвестен, блокируется спинбокс для выбора отступа
 
-        if lang=="English": # установка значения переменной lang, понятное для функции caesar.encrypt()
-            lang = 0
-        elif lang=="Русский":
-            lang = 1
+        language = (language[0] + language[1]).lower()# установка значения переменной lang, понятное для функции caesar.encrypt()
               
-        self.spin.setMaximum(len(caesar.lang[lang])) # изменение максимального/минимального числа для спинбокса, в зависимости от длины алфавита
-        self.spin.setMinimum(len(caesar.lang[lang]) * -1)
-
-        if indent==True: # если отступ известен, функция выполняется 1 раз
-            out = caesar.encrypt(caesar.lang[lang], ind, txt) 
+        self.spin.setMaximum(len(caesar.alphabets[caesar.languages.index(language)])) # изменение максимального/минимального числа для спинбокса, в зависимости от длины алфавита
+        self.spin.setMinimum(len(caesar.alphabets[caesar.languages.index(language)]) * -1)
+        
+        if indent_is_known==True: # если отступ известен, функция выполняется 1 раз
+            out = caesar.encrypt(language, indent, text) 
         else: # если отступ незивестен, функция выполняется [ДЛИНА АЛФАВИТА ЯЗЫКА] раз
             out = ''
-            for i in range(0, len(caesar.lang[lang])):
-                out += f"ROT {i * -1}: " + caesar.encrypt(caesar.lang[lang], i * -1, txt) + "\n"
+            for i in range(0, len(caesar.alphabets[caesar.languages.index(language)])):
+                out += f"ROT {i * -1}: " + caesar.encrypt(language, i * -1, text) + "\n"
 
         self.textout.setPlainText(out) # вывод шифрованого/дешифрованого текста
 
 
 if __name__ == "__main__":
     # простой графический интерфейс для шифрования цезаря
+    
+    indent_is_known = True # по умолчанию отступ известен
+    languages = ['English','Russian'] # языки
+
 
     app = QtWidgets.QApplication(argv)
     window = Ui()
-    
-    indent = True # по умолчанию отступ известен
 
     app.exec_()
 

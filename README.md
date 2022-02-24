@@ -12,4 +12,11 @@ or run caesar.py if you prefer to work from the terminal
 Запустите caesar-ui.py, если вы хотите использовать графическую версию,
 или же запустите caesar.py если вам приятней работать в терминале
 
-**Python 3.10**
+____
+
+**[API Using]:**
+```python
+     caesar.encrypt(language, indent, text)
+```
+
+**Python 3.10 | PyQt5**
