@@ -1,11 +1,11 @@
-# Caesar cypher **[English :us:]**
+# 📜 Caesar cypher **[English :us:]**
 Encrypt / Decrypt caesar cipher
 
 **Use:**
 Run caesar-ui.py if you want to run the graphical version of the ransomware, 
 or run caesar.py if you prefer to work from the terminal
 
-# Шифр Цезаря **[Russian :ru:]**
+# 📜 Шифр Цезаря **[Russian :ru:]**
 Зашифровать / Дешифровать шифром Цезаря
 
 **Использование:**
@@ -14,7 +14,7 @@ or run caesar.py if you prefer to work from the terminal
 
 ____
 
-**[API Using]:**
+🔧 **[API Using]:**
 ```python
      caesar.encrypt(language, indent, text)
 ```
