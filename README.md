@@ -1,9 +1,9 @@
 # 📜 Caesar cypher
 Encrypt / Decrypt caesar cipher
 
-##**Use:**
-Run caesar-ui.py if you want to run the graphical version of the ransomware, 
-or run caesar.py if you prefer to work from the terminal
+**Usage:**
+Run caesar-ui.py for UI version 
+caesar.py for cli version 
 ____
 
 🔧 **[API Using]:**
