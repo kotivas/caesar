@@ -1,13 +1,14 @@
 # 📜 Caesar cypher
 Encrypt / Decrypt caesar cipher
 
-**Usage:**
+## 🛠️ Usage:
 
-``caesar-ui.py`` for UI version 
-''caesar.py`` for CLI version 
+``python3 caesar-ui.py`` for UI version 
+
+``python3 caesar.py`` for CLI version 
 ____
 
-🔧 **[API Using]:**
+## 🔧 API Using:
 ```python
      caesar.encrypt(language, indent, text)
 ```
