@@ -2,7 +2,9 @@
 Encrypt / Decrypt caesar cipher
 
 **Usage:**
+
 Run caesar-ui.py for UI version 
+
 caesar.py for cli version 
 ____
 
